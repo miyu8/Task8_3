@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="LifeService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ILifeService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Life.Initialization" />
+      <xsd:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Life.LivingProperty" />
+      <xsd:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Life.Gaming" />
+      <xsd:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Life" />
+      <xsd:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ILifeService_Game1New_InputMessage">
+    <wsdl:part name="parameters" element="tns:Game1New" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Game1New_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Game1NewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Game2New_InputMessage">
+    <wsdl:part name="parameters" element="tns:Game2New" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Game2New_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Game2NewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Game3New_InputMessage">
+    <wsdl:part name="parameters" element="tns:Game3New" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Game3New_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Game3NewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Game4New_InputMessage">
+    <wsdl:part name="parameters" element="tns:Game4New" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Game4New_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Game4NewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_RunSave_InputMessage">
+    <wsdl:part name="parameters" element="tns:RunSave" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_RunSave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RunSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_RunNew_InputMessage">
+    <wsdl:part name="parameters" element="tns:RunNew" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_RunNew_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RunNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_End_InputMessage">
+    <wsdl:part name="parameters" element="tns:End" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_End_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_IsData_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsData" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_IsData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Step_InputMessage">
+    <wsdl:part name="parameters" element="tns:Step" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Step_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StepResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Remove_InputMessage">
+    <wsdl:part name="parameters" element="tns:Remove" />
+  </wsdl:message>
+  <wsdl:message name="ILifeService_Remove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ILifeService">
+    <wsdl:operation name="Game1New">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/Game1New" message="tns:ILifeService_Game1New_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/Game1NewResponse" message="tns:ILifeService_Game1New_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Game2New">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/Game2New" message="tns:ILifeService_Game2New_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/Game2NewResponse" message="tns:ILifeService_Game2New_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Game3New">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/Game3New" message="tns:ILifeService_Game3New_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/Game3NewResponse" message="tns:ILifeService_Game3New_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Game4New">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/Game4New" message="tns:ILifeService_Game4New_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/Game4NewResponse" message="tns:ILifeService_Game4New_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RunSave">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/RunSave" message="tns:ILifeService_RunSave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/RunSaveResponse" message="tns:ILifeService_RunSave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RunNew">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/RunNew" message="tns:ILifeService_RunNew_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/RunNewResponse" message="tns:ILifeService_RunNew_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="End">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/End" message="tns:ILifeService_End_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/EndResponse" message="tns:ILifeService_End_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/IsData" message="tns:ILifeService_IsData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/IsDataResponse" message="tns:ILifeService_IsData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Step">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/Step" message="tns:ILifeService_Step_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/StepResponse" message="tns:ILifeService_Step_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILifeService/Remove" message="tns:ILifeService_Remove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILifeService/RemoveResponse" message="tns:ILifeService_Remove_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ILifeService" type="tns:ILifeService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Game1New">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/Game1New" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Game2New">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/Game2New" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Game3New">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/Game3New" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Game4New">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/Game4New" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunSave">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/RunSave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunNew">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/RunNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="End">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/End" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsData">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/IsData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Step">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/Step" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap:operation soapAction="http://tempuri.org/ILifeService/Remove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ILifeService" type="tns:ILifeService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ILifeService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Game1New">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/Game1New" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Game2New">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/Game2New" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Game3New">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/Game3New" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Game4New">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/Game4New" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunSave">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/RunSave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunNew">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/RunNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="End">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/End" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsData">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/IsData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Step">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/Step" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap12:operation soapAction="http://tempuri.org/ILifeService/Remove" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LifeService">
+    <wsdl:port name="BasicHttpBinding_ILifeService" binding="tns:BasicHttpBinding_ILifeService">
+      <soap:address location="http://localhost:9001/LifeService" />
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ILifeService" binding="tns:NetTcpBinding_ILifeService">
+      <soap12:address location="net.tcp://localhost:9002/LifeService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:9002/LifeService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-AID7534\A</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

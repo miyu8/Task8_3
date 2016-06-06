@@ -3,9 +3,10 @@ using Life.Models;
 using Life.Living.Grass.Life;
 using System.ServiceModel;
 using System.Runtime.Serialization;
+
 namespace Life.Gaming
 {
-
+    [DataContract]
     public class Game1 : GameBase
     {
         public Game1(GameProperty gameproperty)
@@ -13,6 +14,7 @@ namespace Life.Gaming
             Type = 1;
             gameProperty = gameproperty;
         }
+
         [OperationContract]
         public override void InitRnd()
         {

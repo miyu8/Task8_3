@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Life.Initialization" />
+  <xs:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Life.Gaming" />
+  <xs:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="Game1New">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Life.Initialization" minOccurs="0" name="options" nillable="true" type="q1:Options" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Game1NewResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="Game1NewResult" nillable="true" type="q2:Game1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Game2New">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Life.Initialization" minOccurs="0" name="options" nillable="true" type="q3:Options" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Game2NewResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="Game2NewResult" nillable="true" type="q4:Game2" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Game3New">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Life.Initialization" minOccurs="0" name="options" nillable="true" type="q5:Options" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Game3NewResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="Game3NewResult" nillable="true" type="q6:Game3" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Game4New">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Life.Initialization" minOccurs="0" name="options" nillable="true" type="q7:Options" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Game4NewResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="Game4NewResult" nillable="true" type="q8:Game4" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunSave">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Life.Initialization" minOccurs="0" name="options" nillable="true" type="q9:Options" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="iteration" type="xs:int" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="igame" nillable="true" type="q10:GameBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunSaveResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunNew">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="igame" nillable="true" type="q11:GameBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunNewResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="End">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="igame" nillable="true" type="q12:GameBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="boolMenu" nillable="true" type="q13:ArrayOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Step">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Life.Gaming" minOccurs="0" name="igame" nillable="true" type="q14:GameBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StepResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="StepResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Remove">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

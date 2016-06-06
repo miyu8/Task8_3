@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Life.Initialization;
 using Life.BaseData;
-using System.IO;
-using System.Runtime.Serialization.Json;
 using Life;
 using System.Threading;
-
-
+using Life_Form.GameForm;
+using Life.Gaming;
 
 namespace Life_Form
 {
-
     public partial class Form1 : Form
     {
         public delegate void textBox1Changes(string text);
@@ -23,32 +19,40 @@ namespace Life_Form
         public event dataGridView1Changes DataGridView1Change;
         public delegate void stopGame();
         public event stopGame StopGame;
+
         public void TextBoxChanged(string text)
         {
             TextBox1Change?.Invoke(text);
         }
+
         public void dataGridViewChanged()
         {
             DataGridView1Change?.Invoke();
         }
+
         public void StopChanged()
         {
             StopGame?.Invoke();
         }
-        public InitializationForm.Move move;
+
         public Options options;
-        private Thread gameThread;
+        public Thread gameThread;
         public bool exit;
-        public bool dispose;
         DataModelContainer db;
         RecordBase recordBase = new RecordBase();
+        JSON jSON = new JSON();
+        public GameBase igame;
+        public GameBaseForm gameBaseForm;
+        public ServerInit serverInit;
+        DataGridView dataGridView;
+        Form savingsForm;
+        GameService.LifeServiceClient service = new GameService.LifeServiceClient("BasicHttpBinding_ILifeService");
+
         public Form1()
         {
             InitializeComponent();
-            DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(Options));
-            string json = File.ReadAllText(@"..\..\Settings.json");
-            MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(json));
-            options = (Options)js.ReadObject(stream);
+            options = jSON.GetJson();
+            //serverInit = new ServerInit(options);
             dataGridView1.ColumnHeadersVisible = false;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -67,30 +71,27 @@ namespace Life_Form
             StopChanged();
         }
 
-        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        private void ClickDataGrid()
         {
-            DataGridView dataGridView = CreateDataGridView();
+            dataGridView = CreateDataGridView();
             FillDataView(dataGridView);
-            Form savingsForm = new Form();
+            savingsForm = new Form();
             savingsForm.Width = 600;
             savingsForm.Height = 1000;
             dataGridView.Width = 600;
             dataGridView.Height = 1000;
             savingsForm.Controls.Add(dataGridView);
+        }
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            ClickDataGrid();
             dataGridView.CellDoubleClick += dataGridView_MouseDoubleClick;
             savingsForm.ShowDialog();
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
-            DataGridView dataGridView = CreateDataGridView();
-            FillDataView(dataGridView);
-            Form savingsForm = new Form();
-            savingsForm.Width = 600;
-            savingsForm.Height = 1000;
-            dataGridView.Width = 600;
-            dataGridView.Height = 1000;
-            savingsForm.Controls.Add(dataGridView);
+            ClickDataGrid();
             dataGridView.CellContentClick += DataGridViewCell_Click;
             savingsForm.ShowDialog();
             MessageBox.Show("Выбранная игра удалена");
@@ -179,7 +180,7 @@ namespace Life_Form
                     count = db.GameSet.Count();
                     if (count != 0)
                     {
-                        recordBase.RemoveList(db.GameSet.ToList().ElementAt(e.RowIndex).Id);
+                        serverInit.Remove(db.GameSet.ToList().ElementAt(e.RowIndex).Id);
                         ((Form)((DataGridView)sender).Parent).Close();
                     }
                 }
@@ -197,9 +198,10 @@ namespace Life_Form
             toolStripMenuItem8.Enabled = false;
             gameThread = new Thread(() =>
             {
-                move = new InitializationForm.Move(type, this, options);
-                move.RunSave(id, iteration);
-                move.Begin();
+                MoveForm(type);
+                service.RunSave(options,id, iteration, igame);
+                //serverInit.RunSave(id, iteration, igame);
+                Begin();
                 Active();
             });
             gameThread.Start();
@@ -210,11 +212,15 @@ namespace Life_Form
             exit = false;
             toolStripMenuItem2.Enabled = false;
             toolStripMenuItem8.Enabled = false;
+            
+            //service.Game1New();
             gameThread = new Thread(() =>
             {
-                move = new InitializationForm.Move(type, this, options);
-                move.RunNew();
-                move.Begin();
+                //service = new GameService.LifeServiceClient("BasicHttpBinding_ILifeService");
+                MoveForm(type);
+                service.RunNew(igame);
+                //serverInit.RunNew(igame);
+                Begin();
                 Active();
             });
             gameThread.Start();
@@ -278,6 +284,60 @@ namespace Life_Form
         private void toolStripMenuItem10_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void Form1_FormClosing(object sender, EventArgs e)
+        {
+            Environment.Exit(1);
+        }
+        public void MoveForm(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    igame = service.Game1New(options);//serverInit.Game1New();
+                    gameBaseForm = new Game1Form(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name, this);
+                    break;
+                case 2:
+                    igame = service.Game2New(options);//serverInit.Game2New();
+                    gameBaseForm = new Game2Form(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name, this);
+                    break;
+                case 3:
+                    igame = service.Game3New(options);//serverInit.Game3New();
+                    gameBaseForm = new Game3Form(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name, this);
+                    break;
+                case 4:
+                    igame = service.Game4New(options);//serverInit.Game4New();
+                    gameBaseForm = new Game4Form(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name, this);
+                    break;
+            }
+        }
+
+        public void Begin()
+        {
+
+            gameBaseForm.DrawForm(igame.gameField, igame.iteration, igame.ValueCells);
+            Thread.Sleep(500);
+            if (exit)
+            {
+                service.End(igame);//serverInit.End(igame);
+                return;
+            }
+            while (service.Step(igame))//serverInit.Step(igame))
+            {
+                gameBaseForm.ClearNumbers();
+                gameBaseForm.DrawForm(igame.gameField, igame.iteration, igame.ValueCells);
+                Thread.Sleep(500);
+                if (exit)
+                {
+                    service.End(igame);//serverInit.End(igame);
+                    gameBaseForm.ClearTable();
+                    MessageBox.Show("Игра остановлена и сохранена");
+                    return;
+                }
+            }
+            gameBaseForm.ClearTable();
+            MessageBox.Show("Игра окончена");
         }
     }
 }

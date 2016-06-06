@@ -1,9 +1,12 @@
 ﻿using Life.LivingProperty;
 using Life.Models;
 using Life.Living.Grass.Life;
+using System.ServiceModel;
+using System.Runtime.Serialization;
 
 namespace Life.Gaming
 {
+    [DataContract]
     public class Game2 : GameBase
     {
         Grass1Property grass1Property;
@@ -13,6 +16,8 @@ namespace Life.Gaming
             gameProperty = gameproperty;
             grass1Property = grass1property;
         }
+
+        [OperationContract]
         public override void InitRnd()
         {
             gameField = new Cell[gameProperty.SizeX, gameProperty.SizeY];
