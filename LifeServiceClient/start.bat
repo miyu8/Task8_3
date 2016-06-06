@@ -1,0 +1,1 @@
+svcutil http://localhost:9001/LifeService /config:App.config
