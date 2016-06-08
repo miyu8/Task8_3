@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\Life Console\Life Console.csproj">
       <Project>{131b466e-8fa2-44f9-a03f-2414537cc143}</Project>
       <Name>Life Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Life Form\Life Form.csproj">
+      <Project>{f797d5ad-1a9f-4c87-98ed-97e473b4eae8}</Project>
+      <Name>Life Form</Name>
     </ProjectReference>
     <ProjectReference Include="..\Life\Life.csproj">
       <Project>{5657de21-0542-4aa4-a956-160875f8db74}</Project>

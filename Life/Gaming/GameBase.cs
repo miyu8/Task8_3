@@ -12,15 +12,15 @@ namespace Life.Gaming
     {
         [DataMember]
         public int iteration;
-        //[DataMember]
+        [DataMember]
         public int[] ValueCells = new int[6];
         [DataMember]
         public int Type { get; protected set; }
-        //[DataMember]
+        [DataMember]
         public Cell[,] gameField { get; set; }
-        //[DataMember]
-        public Cell[,] gameFieldNext;
-        //[DataMember]
+        [DataMember]
+        public Cell[,] gameFieldNext { get; set; }
+        [DataMember]
         public List<Cell[,]> ListgameField = new List<Cell[,]>();
         [DataMember]
         public GameProperty gameProperty { get; set; }

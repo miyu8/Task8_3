@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Life.Gaming" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Life.Gaming" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Life.LivingProperty" />
+  <xs:import schemaLocation="http://localhost:9001/LifeService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Life" />
+  <xs:complexType name="Game1">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GameBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Game1" nillable="true" type="tns:Game1" />
+  <xs:complexType name="GameBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Life.LivingProperty" minOccurs="0" name="gameProperty" nillable="true" type="q1:GameProperty" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Life" minOccurs="0" name="generaterandom" nillable="true" type="q2:GenerateRandom" />
+      <xs:element minOccurs="0" name="iteration" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameBase" nillable="true" type="tns:GameBase" />
+  <xs:complexType name="Game2">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GameBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Game2" nillable="true" type="tns:Game2" />
+  <xs:complexType name="Game3">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GameBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Game3" nillable="true" type="tns:Game3" />
+  <xs:complexType name="Game4">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GameBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Game4" nillable="true" type="tns:Game4" />
+</xs:schema>

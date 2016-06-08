@@ -1,5 +1,5 @@
 ﻿using System;
-//using LifeServiceLib;
+using LifeServiceLib;
 
 namespace MyLifeServiceClient
 {
@@ -7,7 +7,7 @@ namespace MyLifeServiceClient
 	{
 		static void Main(string[] args)
 		{
-  //          var client = new LifeServiceClient("NetTcpBinding_ILifeService");
+            var client = new LifeServiceClient("NetTcpBinding_ILifeService");
 
   //          client.AddStudent(new StudentDto
   //          {

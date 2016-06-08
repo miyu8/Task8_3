@@ -2,14 +2,10 @@
 using System.Linq;
 using Life.Initialization;
 using Life.BaseData;
-using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using Life;
-using System.ServiceModel;
-using Life.Interface;
-//using LifeServiceLib;
-using BLL;
+using Life.Gaming;
+using Life.GameConsole;
+using System.Threading;
 
 namespace Life_Console
 {
@@ -24,11 +20,15 @@ namespace Life_Console
         public string[] menu2 = new string[4];
         public string[] menu3;
         ConsoleKeyInfo answer;
-        public Move move;
         DataModelContainer db;
         string join;
         RecordBase recordBase = new RecordBase();
         Options options;
+        JSON jSON = new JSON();
+        public GameBase igame;
+        public GameBaseConsole gameBaseConsole;
+        public ServerInit serverInit;
+
         public void Run()
         {
             Console.CursorVisible = false;
@@ -39,26 +39,9 @@ namespace Life_Console
             menu2[2] = "Смешанная";
             menu2[3] = "С травоядными животными";
             boolMenu[0] = true;
+            options = jSON.GetJson();
+            serverInit = new ServerInit(options);
             MainMenu();
-        }
-
-        public void IsData()
-        {
-            try
-            {
-                using (db = new DataModelContainer())
-                {
-                    db.Database.CreateIfNotExists();
-                    if (db.GameSet.Count() != 0)
-                        boolMenu[1] = true;
-                    else
-                        boolMenu[1] = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                recordBase.ErrorBase(ex);
-            }
         }
 
         private void ColorMenu()
@@ -104,13 +87,9 @@ namespace Life_Console
                 }
                 else if (answer.Key == ConsoleKey.Enter)
                 {
-                    DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(Options));
-                    string json = File.ReadAllText(@"..\..\Settings.json");
-                    MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(json));
-                    options = (Options)js.ReadObject(stream);
-                    move = new Move(choise2 + 1, options);
-                    move.RunNew();
-                    move.Begin();
+                    Move(choise2 + 1);
+                    serverInit.RunNew(igame);
+                    Begin();
                 }
                 else if (answer.Key == ConsoleKey.UpArrow)
                     choise2--;
@@ -159,19 +138,15 @@ namespace Life_Console
                         }
                         else if (answer.Key == ConsoleKey.Enter)
                         {
-                            DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(Options));
-                            string json = File.ReadAllText(@"..\..\Settings.json");
-                            MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(json));
-                            options = (Options)js.ReadObject(stream);
                             options.gameProperty.SizeX = db.GameSet.ToList().ElementAt(choise3).SizeX;
                             options.gameProperty.SizeY = db.GameSet.ToList().ElementAt(choise3).SizeY;
-                            move = new Move(db.GameSet.ToList().ElementAt(choise3).Type, options);
-                            move.RunSave(db.GameSet.ToList().ElementAt(choise3).Id, db.GameSet.ToList().ElementAt(choise3).Iteration);
-                            move.Begin();
+                            Move(db.GameSet.ToList().ElementAt(choise3).Type);
+                            serverInit.RunSave(db.GameSet.ToList().ElementAt(choise3).Id, db.GameSet.ToList().ElementAt(choise3).Iteration, igame);
+                            Begin();
                         }
                         else if (answer.Key == ConsoleKey.Delete)
                         {
-                            recordBase.RemoveList(db.GameSet.ToList().ElementAt(choise3).Id);
+                            serverInit.Remove(db.GameSet.ToList().ElementAt(choise3).Id);
                         }
                         else if (answer.Key == ConsoleKey.UpArrow)
                         {
@@ -198,7 +173,7 @@ namespace Life_Console
         {
             while (true)
             {
-                IsData();
+                serverInit.IsData(boolMenu);
                 ColorMenu();
                 answer = Console.ReadKey(true);
                 if (answer.Key == ConsoleKey.Escape)
@@ -228,6 +203,52 @@ namespace Life_Console
                     choise = menu.Length - 1;
                 else if (choise == menu.Length)
                     choise = 0;
+            }
+        }
+
+        public void Move(int type)
+        {
+            Console.Clear();
+            switch (type)
+            {
+                case 1:
+                    igame = serverInit.Game1New();
+                    gameBaseConsole = new Game1Console(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name);
+                    break;
+                case 2:
+                    igame = serverInit.Game2New();
+                    gameBaseConsole = new Game2Console(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name);
+                    break;
+                case 3:
+                    igame = serverInit.Game3New();
+                    gameBaseConsole = new Game3Console(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name);
+                    break;
+                case 4:
+                    igame = serverInit.Game4New();
+                    gameBaseConsole = new Game4Console(options.gameProperty.SizeX, options.gameProperty.SizeY, igame.GetType().Name);
+                    break;
+            }
+        }
+
+        public void Begin()
+        {
+            gameBaseConsole.DrawConsole(igame.gameField, igame.iteration, igame.ValueCells);
+            Thread.Sleep(500);
+            if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)
+            {
+                serverInit.End(igame);
+                return;
+            }
+            while (serverInit.Step(igame))
+            {
+                gameBaseConsole.ClearNumbers();
+                gameBaseConsole.DrawConsole(igame.gameField, igame.iteration, igame.ValueCells);
+                Thread.Sleep(500);
+                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)
+                {
+                    serverInit.End(igame);
+                    return;
+                }
             }
         }
     }

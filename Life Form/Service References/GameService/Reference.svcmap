@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="56fe5489-d165-4994-83ed-57c5acb06b83" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9001/LifeService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="LifeService.xsd" MetadataType="Schema" ID="c4ae2588-9e75-4030-989b-cc9ec88fba15" SourceId="1" SourceUrl="http://localhost:9001/LifeService?xsd=xsd4" />
+    <MetadataFile FileName="LifeService1.xsd" MetadataType="Schema" ID="67873e06-7242-4821-bbe1-8ca0b09f0f55" SourceId="1" SourceUrl="http://localhost:9001/LifeService?xsd=xsd5" />
+    <MetadataFile FileName="LifeService.disco" MetadataType="Disco" ID="d344a47f-f985-42a9-a561-9ffcf1f2ea53" SourceId="1" SourceUrl="http://localhost:9001/LifeService?disco" />
+    <MetadataFile FileName="LifeService2.xsd" MetadataType="Schema" ID="efbea8ca-922c-4d46-a731-7549aec08462" SourceId="1" SourceUrl="http://localhost:9001/LifeService?xsd=xsd3" />
+    <MetadataFile FileName="LifeService3.xsd" MetadataType="Schema" ID="a85ee4df-7182-4c87-a79f-ee0d131a201d" SourceId="1" SourceUrl="http://localhost:9001/LifeService?xsd=xsd0" />
+    <MetadataFile FileName="LifeService4.xsd" MetadataType="Schema" ID="bebdc618-a984-4799-9e59-5d70a8e007be" SourceId="1" SourceUrl="http://localhost:9001/LifeService?xsd=xsd1" />
+    <MetadataFile FileName="LifeService5.xsd" MetadataType="Schema" ID="e9a806b6-9ebc-4777-bc27-aed37cb2d7bd" SourceId="1" SourceUrl="http://localhost:9001/LifeService?xsd=xsd2" />
+    <MetadataFile FileName="LifeService.wsdl" MetadataType="Wsdl" ID="e3fc66d4-4f7f-4ad1-a909-8e87ceb62bf5" SourceId="1" SourceUrl="http://localhost:9001/LifeService?wsdl" />
+    <MetadataFile FileName="LifeService6.xsd" MetadataType="Schema" ID="fcba0d93-eb18-48f8-811e-78512a6f2c27" SourceId="1" SourceUrl="http://localhost:9001/LifeService?xsd=xsd6" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

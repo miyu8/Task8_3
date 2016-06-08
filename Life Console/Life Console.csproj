@@ -77,15 +77,39 @@
     <Compile Include="GameConsole\Game3Console.cs" />
     <Compile Include="GameConsole\Game4Console.cs" />
     <Compile Include="GameConsole\GameBaseConsole.cs" />
-    <Compile Include="Init.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderConsole.cs" />
+    <Compile Include="Service References\GameService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BLL.SaveService.datasource" />
+    <None Include="Service References\GameService\LifeService.wsdl" />
+    <None Include="Service References\GameService\LifeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\LifeService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\LifeService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\LifeService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\LifeService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\LifeService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -108,6 +132,27 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GameService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameService\LifeService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
